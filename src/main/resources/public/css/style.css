@@ -1,0 +1,181 @@
+/* CSS Document */
+*{ margin:0; padding:0;}
+a:focus, a:after, a:hover{ outline:0;-moz-outline: none;}
+a{ cursor: pointer;text-decoration: none;outline: none;background-color: transparent;}
+img{ border:0;}
+table{ border-collapse:collapse;}
+.clr{ clear:both;}
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { display: table; content: ''; }
+.clearfix:after { clear: both; }
+html,body{ height: 100%;font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu; background:#eb4064;}
+
+.ryui-box
+{
+    display:         box;
+    display: -webkit-box;
+    display:-moz-box;
+}
+.ryui-box-ver
+{
+    box-orient: vertical;
+    -webkit-box-orient: vertical;
+}
+.ryui-box-align-center
+{
+    box-align: center;
+    -webkit-box-align: center;
+}
+.ryui-box-pack-end
+{
+    box-pack: end;
+    -webkit-box-pack: end;
+}
+.ryui-box-flex-1
+{
+    box-flex: 1;
+    -webkit-box-flex: 1;
+}
+
+.ryui-box-flex-2
+{
+    box-flex: 2;
+    -webkit-box-flex: 2;
+}
+input[type='button'],
+input[type='submit'],
+input[type='reset'],
+button,
+.ryui-btn
+{
+    font-size: 1.2rem;
+    font-weight: bold;
+	font-family:微软雅黑;
+    line-height: 1.6rem;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    margin-bottom: 0;
+    padding: .6rem .75rem;
+    cursor: pointer;
+    -webkit-transition: all;
+    transition: all;
+    -webkit-transition-timing-function: linear;
+    transition-timing-function: linear;
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;
+    text-align: center;
+    vertical-align: top;
+    white-space: nowrap;
+    color: #ff2c58;
+    border: .0625rem solid #ffd200;
+    border-radius: .8rem;
+    border-top-left-radius: .8rem;
+    border-top-right-radius: .8rem;
+    border-bottom-right-radius: .8rem;
+    border-bottom-left-radius: .8rem;
+    background-color: #ffd200;
+    background-clip: padding-box;
+}
+input[type='button']:enabled:active,
+input[type='button'].ryui-active:enabled,
+input[type='submit']:enabled:active,
+input[type='submit'].ryui-active:enabled,
+input[type='reset']:enabled:active,
+input[type='reset'].ryui-active:enabled,
+button:enabled:active,
+button.ryui-active:enabled,
+.ryui-btn:enabled:active,
+.ryui-btn.ryui-active:enabled
+{
+    color: #fff;
+    background-color: #929292;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
+}
+input[type='button']:disabled,
+input[type='button'].ryui-disabled,
+input[type='submit']:disabled,
+input[type='submit'].ryui-disabled,
+input[type='reset']:disabled,
+input[type='reset'].ryui-disabled,
+button:disabled,
+button.ryui-disabled,
+.ryui-btn:disabled,
+.ryui-btn.ryui-disabled
+{
+    opacity: .6;
+}
+
+#box{background:#eb4064;background-size: 100% 100%; width: 100%; min-height: 100%; }
+#box .link{ position:absolute; top:5.5rem; right:0; z-index:2; width:1.7rem; height:4.6rem;}
+#box .link a{ float:left; background:url(../images/baoxian_link.png) no-repeat center; background-size: 100% 100%; width:100%; height:100%;}
+#box .logo{  position: absolute; top: 0; width:100%;background:url(../images/baoxian_logo.jpg) no-repeat center top;background-size: 100% 100%; width: 100%; height:20rem; z-index: 1;}
+#box .box{ padding-top:20rem;}
+#box .box h2{ font-size:1.2rem; color:#fff; font-weight:normal;}
+#box .box h3{ font-size:.9rem; color:#fff; font-weight:normal;}
+.input{ background:#fff; width:80%; height:2rem; border-radius:5px; padding-left:.2rem; margin-top:.6rem;}
+.input input{ width:99%; border:0; background:none; height:2rem; line-height:2rem; color:#cccccc; font-size:1rem; font-family:微软雅黑;}
+.ryui-box_w{ width:80%;}
+.input_s{ width:70%; margin-right:.5rem;}
+.chkbox{ margin:1rem auto;}
+.chkbox input{ width:.9rem; height:.9rem;}
+.btn{ width:80%;}
+.btn button{ width:100%;}
+.man_click{ width:15%; margin-top:.45rem;}
+.man_click input[type='button']{ 
+ color: #ff2c58;
+    border: .0625rem solid #ffd200;
+    border-radius:0;
+    border-top-left-radius: 0;
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+    border-bottom-left-radius: 0;
+    background-color: #ffd200;
+	font-size: .8rem;
+    font-weight: 400;
+	font-family:微软雅黑;
+    line-height: 1rem;
+	padding:.5rem .5rem;
+}
+.man{ width:15%; margin-top:.45rem;}
+.man input[type='button']{ 
+ color: #eb3f63;
+    border: .0625rem solid #ffd200;
+    border-radius:0;
+    border-top-left-radius: 0;
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+    border-bottom-left-radius: 0;
+    background-color: #ffd200;
+	font-size: .8rem;
+    font-weight: 400;
+	font-family:微软雅黑;
+    line-height: 1rem;
+	padding:.5rem .5rem;
+	background:#fff;
+}
+
+#page1-mask{background:#000; opacity: 0.5; background-size: 100% 100%; width: 100%; height: 100%; z-index:9996; top:0; left:0; position:fixed;}
+#page1{ width:88%; background:#fff; margin-bottom:6rem; z-index:9997; position:absolute; top:2rem; left:6%; border-radius: .5rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius:  .5rem;
+}
+#page2-mask{background:#000; opacity: 0.5; background-size: 100% 100%; width: 100%; height: 100%; z-index:9998; top:0; left:0; position:fixed;}
+#page2{ width:88%; background:#fff; z-index:9999; position:absolute; top:5rem; left:6%; border-radius: .5rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius:  .5rem;
+}
+.baoxian_table{display:inline-block; width:90%; margin-left:5%; height:13.5rem;}
+.baoxian_table img{ width:100%; height:100%;}
+.txt{ width:90%; }
+.txt h4{ color:#f5234f; font-size:1rem;}
+.txt span{ color:#666666; font-size:1rem; padding-bottom:2rem; display:inline-block; width:100%;word-break:break-all; }
+.close{ margin:.5rem .3rem auto auto; display:inline-block; height:2rem; width:2rem; float:right;}
+.close img{width:100%; height:100%;}
+h5{ font-size:1.4rem; color:#f5234f; font-weight:normal; text-align:center;}
+.page2_txt{  width:92%; margin-left:4%; margin-top:1rem; margin-bottom:2rem;}
+#page2 span{ color:#666666; font-size:1rem; text-align:center;}

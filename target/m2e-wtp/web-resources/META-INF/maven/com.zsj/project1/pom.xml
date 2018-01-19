@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.zsj</groupId>
+  <artifactId>project1</artifactId>
+  <packaging>war</packaging>
+
+  <name>project1</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+		<parent>
+        <groupId>org.springframework.boot</groupId>  
+        <artifactId>spring-boot-starter-parent</artifactId>  
+        <version>1.4.1.RELEASE</version>  
+    </parent> 
+
+  <dependencies>
+    
+     <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+     </dependency>
+         <!-- mysql 数据库驱动. -->
+     <dependency>
+       <groupId>com.microsoft.sqlserver</groupId>
+       <artifactId>sqljdbc4</artifactId>
+       <version>4.0</version>
+	</dependency>
+	
+	<dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-thymeleaf</artifactId>
+       </dependency>
+        
+      <dependency>
+	        <groupId>org.mybatis.spring.boot</groupId>
+	        <artifactId>mybatis-spring-boot-starter</artifactId>
+	        <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+	        <version>1.1.1</version>
+	    </dependency>
+       
+       <!-- mybatis pagehelper -->
+       <dependency>
+		    <groupId>com.github.pagehelper</groupId>
+		    <artifactId>pagehelper</artifactId>
+		    <version>4.1.0</version>
+		</dependency>
+  </dependencies>
+  
+  <build>
+        <plugins>
+            
+            <plugin>  
+	            <groupId>org.apache.maven.plugins</groupId>  
+	            <artifactId>maven-compiler-plugin</artifactId>  
+	            <configuration>  
+	                <source>1.7</source>  
+	                <target>1.7</target>  
+	            </configuration>  
+        	</plugin>  
+        </plugins>
+     </build>
+  
+  <repositories>  
+        <repository>  
+            <id>spring-snapshots</id>  
+            <url>http://repo.spring.io/snapshot</url>  
+            <snapshots><enabled>true</enabled></snapshots>  
+        </repository>  
+        <repository>  
+            <id>spring-milestones</id>  
+            <url>http://repo.spring.io/milestone</url>  
+        </repository>  
+    </repositories>  
+    <pluginRepositories>  
+        <pluginRepository>  
+            <id>spring-snapshots</id>  
+            <url>http://repo.spring.io/snapshot</url>  
+        </pluginRepository>  
+        <pluginRepository>  
+            <id>spring-milestones</id>  
+            <url>http://repo.spring.io/milestone</url>  
+        </pluginRepository>  
+    </pluginRepositories>
+</project>

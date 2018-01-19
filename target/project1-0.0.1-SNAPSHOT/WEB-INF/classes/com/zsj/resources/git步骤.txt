@@ -1,0 +1,42 @@
+git建立远程分支到本地
+git clone ssh://TSKY.sijian.zhou@192.168.2.250/data/git/TSDF_TravelSkyDomesticFlight.git 拷贝远程的仓库
+cd TSReportServices/ cd到TSReportServices分支下
+git branch 查看本地分支
+git branch -a 查看远程分支
+git checkout -b 3u_dev origin/3u_dev把3u_dev保存到本地
+
+git提交代码
+git status查看状态，主要查看有哪些文件没有提交
+git stash保存当前代码修改地方到栈中，回复到checkout的状态
+git pull 从远程分支拉下来修改的地方。
+git stash pop 把我修改的代码从栈中弹出
+git meger origin/xxxxx合并分支
+git add xxx.java 添加某个java文件到待提交代码
+git commit 提交代码到本地库
+git push origin xxxx把本地代码提交到远程仓库
+
+删除本地分支
+git checkout 3u_feature_customize 却换到其他分支
+git branch -D 3u_dev 删除本地分支
+
+
+从3u_xxxx分支合并代码到3u_dev,创建新的目录合并使用cherry-pick
+git checkout -b 3u_dev origin/3u_dev
+git fetch origin 3u_xxxx 把3u_xxxx合并到本地fetch_index中
+git checkout -b 3u_xxxx origin/3u_xxxx
+gitk 找到提交的log，用git log并且找到commitid
+git checkout 3u_dev
+git cherry-pick commitid 多个id用空格隔开
+git status 看是否合并成功
+git mergetool 合并代码，如果修改地方太多，看下gitk中的修改内容，再做合并。
+
+从3u_xxxx分支合并代码到3u_dev,创建新的目录合并使用git merge
+git checkout -b 3u_dev origin/3u_dev
+git merge origin/3u_xxxx 逐个编辑
+
+
+stash用法
+git stash list
+git stash drop 
+
+git reset --hard commitid

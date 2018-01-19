@@ -1,0 +1,207 @@
+/* INICIO
+-------------------------------------------------------------------------*/
+#header{
+	margin: 0 auto 0;
+	width: 100%;
+	position: absolute;
+	text-align: center;
+	top: 0px;
+	background-color: #6C5726;
+	overflow: hidden;
+	position: relative;
+	padding: 50px 0px;
+    border-top: 10px solid #A48E4E;
+    border-bottom: 10px solid #A48E4E;
+}
+#header table, #footer table{
+	height: 100%;
+	width: 100%;
+}
+#header table td, #footer table td{
+	vertical-align: middle;
+}
+#header .content{
+	color: #FFFFFF;
+    float: left;
+    font-size: 50px;
+    font-weight: 300;
+    line-height: 42px;
+    margin-top: 30px;
+    text-align: center;
+    width: 100%;
+}
+#header .content, #footer .content{
+	font-family: 'Pathway Gothic One';
+	color: #ffffff;
+    float: left;
+    font-size: 70px;
+    font-weight: 300;
+    line-height: 80px;
+    margin-top: 2px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+    padding: 30px 0px;
+}
+#header .content > div, #footer .content > div{
+	display: inline-block;
+}
+
+#footer{
+	width:100%;
+	background-color: #6C5726;
+	border-top: 20px dotted #A48E4E;
+	height: 200px;
+}
+
+
+.line{
+	background-color: #DCD293;
+	padding: 50px 0px 25px 0px;
+	width:100%;
+	border-top: 20px dotted #A48E4E;
+}
+
+
+
+.machineContainer{
+	background-color: #e03013;
+	padding: 5px 1px 5px 1px;
+	overflow: hidden;
+	height: 135px;
+}
+.slotMachine{
+	width: 32.333333%;
+	border: 5px solid #a12019;
+	height: 100px;
+	padding: 0px;
+	overflow: hidden;
+	display: inline-block;
+	text-align: center;
+	/*margin: 0px 5px;*/
+	/*border: 5px solid #000;*/
+	background-color: #ffffff;	
+}
+.machineResult{
+	color:#fff;
+	text-align:center;
+	font-weight: 900;
+}
+.noBorder{
+	border:none !important;
+	background: transparent !important;
+}
+.slotMachine .slot{
+	height:100px;
+	background-position-x: 55%;
+	background-repeat: no-repeat;
+}
+.slot1{
+	background-image: url("http://7xj5ea.com1.z0.glb.clouddn.com/T_zq_j1.jpg"); background-size: 100%;
+}
+.slot2{
+	background-image: url("http://7xj5ea.com1.z0.glb.clouddn.com/T_zq_j2.jpg");background-size: 100%;
+}
+.slot3{
+	background-image: url("http://7xj5ea.com1.z0.glb.clouddn.com/T_zq_j1.jpg");background-size: 100%;
+}
+.slot4{
+	background-image: url("http://7xj5ea.com1.z0.glb.clouddn.com/T_zq_j2.jpg");background-size: 100%;
+}
+.slot5{
+	background-image: url("http://7xj5ea.com1.z0.glb.clouddn.com/T_zq_j1.jpg");background-size: 100%;
+}
+.slot6{
+	background-image: url("http://7xj5ea.com1.z0.glb.clouddn.com/T_zq_j2.jpg");background-size: 100%;
+}
+
+.m-lhjct{ width: 533px; height: 411px; margin: auto; position: relative;}
+		.m-lhjct img{display: block;}
+		.m-lhjct .u-sb{ background:#fff1b2; height: 60px; line-height: 60px; color: #f33c1e; font-size:30px; width: 60%; no-repeat; position: absolute; right:150px;bottom:44px; display: block; z-index:1; cursor: pointer; border-radius: 5px; text-align: center;box-shadow:0px 4px 0px #ffc076; }
+		.m-lhjct .u-sb:hover{ background: #feffb2;}
+		/*.m-lhjct .u-sb.on{-webkit-animation-name:y-ain;-webkit-animation-duration:1s;-webkit-animation-timing-function:ease-out;}
+    @-webkit-keyframes y-ain{
+   	  0%{-webkit-transform:rotatex(0deg);transform-origin: bottom;-webkit-transform-origin:bottom;-moz-transform-origin:bottom;-o-transform-origin:bottom;-ms-transform-origin:bottom;}
+      50%{-webkit-transform:rotatex(-90deg);transform-origin: bottom;-webkit-transform-origin:bottom;-moz-transform-origin:bottom;-o-transform-origin:bottom;-ms-transform-origin:bottom;}
+      100%{-webkit-transform:rotatex(-180deg);transform-origin: bottom;-webkit-transform-origin:bottom;-moz-transform-origin:bottom;-o-transform-origin:bottom;-ms-transform-origin:bottom;}
+    }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#textMachine, #textMachine2{
+	width:520px;
+	height: 67px;
+	overflow: hidden;
+	display: inline-block;
+	text-align: left;
+}
+#textMachine > *, #textMachine2 > *{
+	padding: 0px 0px;
+}
+
+
+
+
+.slotMachineButton{
+	width:100px;
+	height: 100px;
+	overflow: hidden;
+	display: inline-block;
+	text-align: center;
+}
+.slotMachineButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffc477), color-stop(1, #fb9e25) );
+	background:-moz-linear-gradient( center top, #ffc477 5%, #fb9e25 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc477', endColorstr='#fb9e25');
+	background-color:#ffc477;
+	border-radius: 75px;
+	text-indent:0px;
+	border:6px solid #eeb44f;
+	display:inline-block;
+	color:#ffffff;
+	font-size:26px;
+	font-weight:bold;
+	font-style:normal;
+	height:100px;
+	line-height:90px;
+	margin-top:10px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #cc9f52;
+	cursor:pointer;
+}
+.slotMachineButton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fb9e25), color-stop(1, #ffc477) );
+	background:-moz-linear-gradient( center top, #fb9e25 5%, #ffc477 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fb9e25', endColorstr='#ffc477');
+	background-color:#fb9e25;
+}.slotMachineButton:active {
+	position:relative;
+	top:1px;
+}
+
+/*媒体查询*/
+@media (max-width: 720px){
+	.machineContainer {height: 111px;}
+	.slotMachine{  width: 31.333333%;}
+}
