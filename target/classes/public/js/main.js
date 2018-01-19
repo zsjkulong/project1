@@ -1,10 +1,10 @@
 var activity={
   url:{
-    baoxian: 'http://huodong.tengyan.com.cn/api/customer?callback=?',
-    click: 'http://huodong.tengyan.com.cn/api/click?callback=?',
+    //baoxian: 'http://huodong.tengyan.com.cn/api/customer?callback=?',
+    //click: 'http://huodong.tengyan.com.cn/api/click?callback=?',
     //open: 'http://huodong.tengyan.com.cn/api/open?callback=?',
     //award: 'http://huodong.tengyan.com.cn/api/award?callback=?',
-    yzmPhp: 'http://huodong.tengyan.com.cn/api/sms?callback=?'
+    yzmPhp: '/smsCode'
   },
   hdID: 210,
   messageProp:{
@@ -41,9 +41,14 @@ var activity={
     });
     //神州畅行手机动态码
     $('.f-yzman1').on('click',function(){
-      if($('#telPhone').val().length==11&& !isNaN($('#telPhone').val())){
-        $.getJSON(_this.url.yzmPhp,{channel: pagekey,id:_this.hdID, user_phone:$('#telPhone').val(),sign:'中国平安'},
+      if($('#telphone').val().length==11&& !isNaN($('#telphone').val())){
+//        $.getJSON(_this.url.yzmPhp,{channel: pagekey,id:_this.hdID, user_phone:$('#telphone').val(),sign:'中国平安'},
+    	  $.getJSON(_this.url.yzmPhp,{user_phone:$('#telphone').val()},
           function(resJson){
+    		  if(resJson.ecode==2){
+    			  _this.message('提示', '请不要重复注册');
+    			  return;
+    		  }
             var myTimer, timing = 60;
             $('.f-yzman1').button('loading');
             myTimer = setInterval(function() {
@@ -108,7 +113,7 @@ var activity={
       },
       submitHandler: function(formevent) { 
         $(formevent).find('.submit'+id).button('loading');
-        var $carnum= $(formevent).find('input[name="carnumber"]'),
+        /*var $carnum= $(formevent).find('input[name="carnumber"]'),
             dataStr= "&mi_source="+mi_source,
             marks={};
         if($carnum.length>0){
@@ -119,7 +124,7 @@ var activity={
         });
         if(id==2){
           dataStr+= '&insurancedate='+$('#xyear').val()+$('#xmonth').val()+'&save=false';
-        }
+        }*/
         
        /* $.ajax({
             url : _this.url.baoxian,
@@ -130,7 +135,7 @@ var activity={
         
         $.ajax({
             type: "POST",
-            url: "/project1/save",
+            url: "save",
           	 data: {
                 "username": $("#username").val(),
                 "sex": $("#sex").val(),

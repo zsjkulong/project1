@@ -26,9 +26,9 @@ public interface DemoMappper {
     @Options(keyProperty="id",keyColumn="id",useGeneratedKeys=true)  
     public long save(Demo demo);  
     
-    @Select(
-    		"  SELECT * from master.dbo.[user]  "
-    		)
+//    @Select(
+//    		"  SELECT count(1) from master.dbo.[user]  where username=#{username} and telphone=#{telphone}"
+//    		)
     public List<Demo> select(Demo demo);
     
     

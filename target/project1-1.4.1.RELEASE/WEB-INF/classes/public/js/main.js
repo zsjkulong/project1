@@ -108,7 +108,7 @@ var activity={
       },
       submitHandler: function(formevent) { 
         $(formevent).find('.submit'+id).button('loading');
-        var $carnum= $(formevent).find('input[name="carnumber"]'),
+        /*var $carnum= $(formevent).find('input[name="carnumber"]'),
             dataStr= "&mi_source="+mi_source,
             marks={};
         if($carnum.length>0){
@@ -119,7 +119,7 @@ var activity={
         });
         if(id==2){
           dataStr+= '&insurancedate='+$('#xyear').val()+$('#xmonth').val()+'&save=false';
-        }
+        }*/
         
        /* $.ajax({
             url : _this.url.baoxian,
@@ -130,7 +130,7 @@ var activity={
         
         $.ajax({
             type: "POST",
-            url: "/project1/save",
+            url: "save",
           	 data: {
                 "username": $("#username").val(),
                 "sex": $("#sex").val(),
