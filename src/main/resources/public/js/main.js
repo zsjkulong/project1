@@ -4,7 +4,7 @@ var activity={
     //click: 'http://huodong.tengyan.com.cn/api/click?callback=?',
     //open: 'http://huodong.tengyan.com.cn/api/open?callback=?',
     //award: 'http://huodong.tengyan.com.cn/api/award?callback=?',
-    yzmPhp: '/smsCode'
+    yzmPhp: 'smsCode'
   },
   hdID: 210,
   messageProp:{
@@ -44,7 +44,9 @@ var activity={
     			  return;
     		  }
             var myTimer, timing = 60;
-            $('#subyzm').button('loading');
+             $.getScript("js/bootstrap.min.js",function(){
+				 $('#subyzm').button('loading');
+	 		});
             myTimer = setInterval(function() {
               --timing;
               $('#subyzm').text("（"+timing+"s）");
