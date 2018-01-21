@@ -1,9 +1,9 @@
-body{ background:url(../images/TY_yyzqbg.jpg) repeat;color: #fff; font-family: "Source Han Sans",Helvetica,Tahoma,Arial,"Hiragino Sans GB","Microsoft YaHei",SimSun,Heiti,sans-serif; }
+body{ background-color: #81bc1f; font-family: "Source Han Sans",Helvetica,Tahoma,Arial,"Hiragino Sans GB","Microsoft YaHei",SimSun,Heiti,sans-serif; }
 body,html{height: 100%;}
 .zscolor{ color: #ff5500 !important;}
 .redcolor{color: #ff0000 !important;}
 .acolor{color: #fff !important;}
-.container-fluid.g-hd{padding: 0;}
+.container-fluid.g-hd{padding: 0;background:color: #81bc1f;}
 .tc{text-align: center;}
 .por{position: relative;}
 .has-error .help-block,.has-error .control-label{color:#ff5500;margin-bottom: 0;}
@@ -22,7 +22,7 @@ body,html{height: 100%;}
 .mb20{ margin-bottom: 20px;}
 .mb15{ margin-bottom: 15px;}
 /*end*/
-.g-hd{padding: 0; background: url(../images/TY_yyzqba.jpg) no-repeat center top; width: 100%; position: relative;}
+.g-hd{padding: 0; background: url(../images/PC-2.jpg) no-repeat center top; width: 100%; position: relative;}
 .m-acttt{ color: #ee4745; margin: 15px 0; }
 .f-lcimg{ margin-top: 25px;}
 .u-actbtn{ background: #fd2155; font-size: 24px; color:#fff;border-radius: 50px; border: 1px solid #fd2155; transition:background 0.5s;-moz-transition:background 0.5s; /* Firefox 4 */-webkit-transition:background 0.5s; /* Safari and Chrome */-o-transition:background 0.5s; /* Opera */ display:block;width:233px; text-align: center; margin:2% auto 0 auto;}
@@ -165,7 +165,7 @@ animation-duration:4s;
   .g-fromct label{ font-style: normal; font-weight: normal; color: #fff;}
  .g-fromct  .f-tt{ line-height: 40px;}
   /********************1013娲诲姩涓撳睘鏍峰紡*************************************/
-  .m-contenbox{ width: 450px; height: 607px; margin: 0 auto;margin-top: 472px; padding: 100px 0px 0 0px;color: #fff;}
+  .m-contenbox{ width: 450px; height: 607px; margin: 0 auto;margin-top: 550px; padding: 100px 0px 0 0px;background-color: #81bc1f;}
   .m-xfbox{ background: url(http://7xj5ea.com1.z0.glb.clouddn.com/T_927_xf.png) no-repeat top; width: 148px; height: 120px; position: absolute; right: 0%; top:36%; padding: 15px 25px;}
   .m-xfbox a{ color: #fff; display: block; text-align: center; line-height: 35px; border-bottom: 1px solid #fff; outline-style: none;}
   .m-xfbox a:last-child{border-bottom: none;}  
@@ -210,6 +210,7 @@ animation-duration:4s;
   .m-tt .ff{font-size: 16px; color: #ffe981;}
   .m-xfbox{ background: url(http://7xj5ea.com1.z0.glb.clouddn.com/T_927_wapxf.png) no-repeat; width: 45px; height: 60px; right:0px; background-size: 100% auto;padding: 0px 5px;top: 21%;}
   .m-xfbox a{font-size: 12px; line-height: 25px;}
+  .g-hd{padding: 0; background: url(../images/H5-2.jpg) no-repeat center top; width: 100%; position: relative;}
   /**********1116end*************/
 }
 /*ipad*/
