@@ -142,7 +142,12 @@ position: absolute;
 }
 
 #page1 img{
+
 	width:100%;height:20rem;
+
+
+
+
 }
 
 #page2-mask {background:#000; opacity: 0.5; background-size: 100% 100%; width: 100%; height: 100%; z-index:9996; top:0; left:0; position:fixed;}
