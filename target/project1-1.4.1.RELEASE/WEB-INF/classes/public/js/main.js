@@ -1,10 +1,11 @@
 var activity={
   url:{
-    baoxian: 'http://huodong.tengyan.com.cn/api/customer?callback=?',
-    click: 'http://huodong.tengyan.com.cn/api/click?callback=?',
+    //baoxian: 'http://huodong.tengyan.com.cn/api/customer?callback=?',
+    //click: 'http://huodong.tengyan.com.cn/api/click?callback=?',
     //open: 'http://huodong.tengyan.com.cn/api/open?callback=?',
     //award: 'http://huodong.tengyan.com.cn/api/award?callback=?',
-    yzmPhp: 'http://huodong.tengyan.com.cn/api/sms?callback=?'
+    yzmPhp: '/smsCode'
+    //yzmPhp: 'http://www.mizhuokeji.com/project/smsCode'
   },
   hdID: 210,
   messageProp:{
@@ -31,28 +32,29 @@ var activity={
   },
   bindEvent: function(){
     var _this=this;
-    // 不同意事项不勾选的时候
-    $('.m-check,.m-check2').on('click', function(event) {
-      if(!$(this).is(':checked')){
-        $('.submit1').button('loading');
-      }else{
-         $('.submit1').button('reset')
-      }
-    });
+
+
     //神州畅行手机动态码
-    $('.f-yzman1').on('click',function(){
-      if($('#telPhone').val().length==11&& !isNaN($('#telPhone').val())){
-        $.getJSON(_this.url.yzmPhp,{channel: pagekey,id:_this.hdID, user_phone:$('#telPhone').val(),sign:'中国平安'},
+    $('#subyzm').on('click',function(){
+      if($('#telphone').val().length==11&& !isNaN($('#telphone').val())){
+//        $.getJSON(_this.url.yzmPhp,{channel: pagekey,id:_this.hdID, user_phone:$('#telphone').val(),sign:'中国平安'},
+    	  $.getJSON(_this.url.yzmPhp,{user_phone:$('#telphone').val()},
           function(resJson){
+    		  if(resJson.ecode==2){
+    			  _this.message('提示', '请不要重复注册');
+    			  return;
+    		  }
             var myTimer, timing = 60;
-            $('.f-yzman1').button('loading');
+             $.getScript("js/bootstrap.min.js",function(){
+				 $('#subyzm').button('loading');
+	 		});
             myTimer = setInterval(function() {
               --timing;
-              $('.f-yzman1').text("（"+timing+"s）");
+              $('#subyzm').text("（"+timing+"s）");
               if (timing === 0) {
                 clearInterval(myTimer);
-                $('.f-yzman1').text('发送验证码');
-                $('.f-yzman1').button('reset');
+                $('#subyzm').text('发送验证码');
+                $('#subyzm').button('reset');
               }
             }, 1000);
           }
@@ -61,16 +63,47 @@ var activity={
         _this.message('提示', '请输入手机号码！');
       }
     });
-    $('.modalForm1 .submit1').on('click',function(){
-      _this.ajaxstart(1,$(this));
+    
+    //$('.f-yzman1').on('click',function(){
+//    	_this.message('提示', '请不要重复注册');
+//      if($('#telphone').val().length==11&& !isNaN($('#telphone').val())){
+////        $.getJSON(_this.url.yzmPhp,{channel: pagekey,id:_this.hdID, user_phone:$('#telphone').val(),sign:'中国平安'},
+//    	  $.getJSON(_this.url.yzmPhp,{user_phone:$('#telphone').val()},
+//          function(resJson){
+//    		  if(resJson.ecode==2){
+//    			  _this.message('提示', '请不要重复注册');
+//    			  return;
+//    		  }
+//            var myTimer, timing = 60;
+//            $('#subyzm').button('loading');
+//            myTimer = setInterval(function() {
+//              --timing;
+//              $('#subyzm').text("（"+timing+"s）");
+//              if (timing === 0) {
+//                clearInterval(myTimer);
+//                $('#subyzm').text('发送验证码');
+//                $('#subyzm').button('reset');
+//              }
+//            }, 1000);
+//          }
+//        ); 
+//      }else{
+//        _this.message('提示', '请输入手机号码！');
+//      }
+//    });
+    
+    
+    $('#sub').on('click',function(){
+      //_this.ajaxstart(1,$('#myModal1'));
     }); 
-    $('.modalForm2 .submit2').on('click',function(){
-      _this.ajaxstart(2,$(this));
-    }); 
+   // $('.modalForm2 .submit2').on('click',function(){
+//      _this.ajaxstart(2,$(this));
+//    }); 
   },
   ajaxstart: function(id,$form){
-    var _this=this;
-    $form.closest('form').validate({
+    	var _this=this;
+   	
+   		$('#myModal1').validate({
       rules:{
         email: 'email',
         carnumber: 'carid',
@@ -95,6 +128,7 @@ var activity={
         city:'zhname',
       },
       messages:{
+      	name: '请输入z',
         birth:{
           minlength: '请检查您的生日，格式如：19910101',
           maxlength: '请检查您的生日，格式如：19910101',
@@ -106,27 +140,23 @@ var activity={
           maxlength: '请检查您的手机号码，重新输入',
         }
       },
+   	
       submitHandler: function(formevent) { 
+		var flag = "0" ;
+		if(!$( "#agree1" ).is(':checked')){
+        		
+        		 _this.message('提示','本人同意领取免费险');
+        		 flag = "1";
+        	}
+
+		if(!$( "#agree2" ).is(':checked')){
+        		_this.message('提示','本人同意中国平安后续致电联系确认保险产品相关事宜');
+        		flag="1";
+        	}
+		      
         $(formevent).find('.submit'+id).button('loading');
-        /*var $carnum= $(formevent).find('input[name="carnumber"]'),
-            dataStr= "&mi_source="+mi_source,
-            marks={};
-        if($carnum.length>0){
-          $carnum.val($carnum.val().toUpperCase());
-        }
-        $(formevent).find(".m-mk").each(function(){
-          marks[$(this).find('.tt').text()]=$('.u-mk').attr('type')=="radio"?$(this).find('input:checked').val():$(this).find('.u-mk').val();
-        });
-        if(id==2){
-          dataStr+= '&insurancedate='+$('#xyear').val()+$('#xmonth').val()+'&save=false';
-        }*/
-        
-       /* $.ajax({
-            url : _this.url.baoxian,
-            type : 'get',
-            dataType : 'jsonp',
-            data: $(formevent).serialize()+dataStr
-          })*/
+
+
         
         $.ajax({
             type: "POST",
@@ -136,7 +166,7 @@ var activity={
                 "sex": $("#sex").val(),
                 "telphone": $("#telphone").val(),
                 "bday":$("#bday").val(),
-                "email":$("#email").val()
+                "email":$("#yzm").val()
             },
          }).done(function(resjson){
           $(formevent).find('.submit'+id).button('reset');
@@ -164,9 +194,18 @@ var activity={
     });
   },
   message: function(title,message){
+   var modalHeight=$(window).height() / 2 - $('#smallModal').height()/2 - $('#smallModal .modal-dialog').height()/2;  
     $('#smallModal .title').html(title);
     $('#smallModal .message').html(message);
-    $('#smallModal').modal('show');
+    $.getScript("js/bootstrap.min.js",function(){
+				 $('#smallModal').modal('show');
+	 });
+    
+    $('#smallModal').css('margin-top', modalHeight );
   }
 }
 activity.init();
+
+
+
+

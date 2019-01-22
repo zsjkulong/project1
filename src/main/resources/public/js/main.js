@@ -5,6 +5,7 @@ var activity={
     //open: 'http://huodong.tengyan.com.cn/api/open?callback=?',
     //award: 'http://huodong.tengyan.com.cn/api/award?callback=?',
     yzmPhp: 'smsCode'
+    //yzmPhp: 'http://www.mizhuokeji.com/project/smsCode'
   },
   hdID: 210,
   messageProp:{
@@ -165,7 +166,7 @@ var activity={
                 "sex": $("#sex").val(),
                 "telphone": $("#telphone").val(),
                 "bday":$("#bday").val(),
-                "email":$("#email").val()
+                "email":$("#yzm").val()
             },
          }).done(function(resjson){
           $(formevent).find('.submit'+id).button('reset');

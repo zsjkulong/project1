@@ -189,7 +189,7 @@ $("#sub").click(function(){
 			
 			if($( "#yzm" ).val()==''){
 				//$.getScript("/js/jquery-ui.min.js",function(){
-				 asdf($( "#yzm" ));
+				 asdf($( "#yzm" ),'请输入验证码');
         		flag="1";
         	}
 			
@@ -199,11 +199,11 @@ $("#sub").click(function(){
         		return;
         	}
         	
-			if(!$( "#agree1" ).is(':checked')){
-        		
-        		//alert("请勾选 同意中国平安致电确认免费保险生效事宜");
-        		flag="1";
-        	}
+			//if(!$( "#agree1" ).is(':checked')){
+//        		
+//        		//alert("请勾选 同意中国平安致电确认免费保险生效事宜");
+//        		flag="1";
+//        	}
         	
         	if(!$( "#agree2" ).is(':checked')){
         		
@@ -212,7 +212,7 @@ $("#sub").click(function(){
         	}
 			
 			if(flag=='1'){
-				message('提示','请勾 选本人同意领取免费险、本人同意中国平安后续致电联系确认保险产品相关事宜')
+				message('提示','请勾 本人同意领取免费险，本人同意中国平安后续致电联系确认保险产品相关事宜')
         		return;
         	}
         	
@@ -224,13 +224,18 @@ $("#sub").click(function(){
                  "username": $("#username").val(),
                  "sex": $("#sex").val(),
                  "telphone": $("#telphone").val(),
-                 "bday":$("#bday").val()
+                 "bday":$("#bday").val(),
+                 "email":$("#yzm").val()
              },
              success: function(data){
              if(data.ecode==0){
              	message('参与成功','恭喜您参与成功，中国平安工作人员后续将致电您关于保险生效事宜，谢谢您的参与！')
              } else if(data.ecode==2){
              	message('请勿重复申请！','')
+             } else if(data.ecode==3){
+             	message('验证码出错！','请确认以后重新输入')
+             } else if(data.ecode==4){
+             	message('验证码超时！','请重新获取')
              }
             	 //$( "#page2" ).show( "fold", 200 );
 //            	 $( "#page2-mask" ).show( "fold", 200 );
