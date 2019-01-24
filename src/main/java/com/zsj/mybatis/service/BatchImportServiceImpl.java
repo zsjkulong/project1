@@ -1,9 +1,11 @@
 package com.zsj.mybatis.service;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -18,6 +20,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
 @Component
 public class BatchImportServiceImpl {
@@ -28,6 +31,10 @@ public class BatchImportServiceImpl {
 	String[] keys = { "name", "sex", "birth", "mobile", "cityName", "mediaSource", "productCode", "policyBeginTime",
 			"supplierName", "supplierType", "disTestOrfree" };
 
+	HashMap<String,String> map = new HashMap<String,String>();
+
+	int i;
+	
 	String userAgent[] = { " Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0",
 			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
 			"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36 OPR/46.0.2597.57 Opera/9.27 (Windows NT 5.2; U; zh-cn)",
@@ -61,7 +68,7 @@ public class BatchImportServiceImpl {
 				wb = new HSSFWorkbook(is);
 			}
 			// 根据excel里面的内容读取知识库信息
-			readExcelValue(wb,uploadfile.getAbsolutePath());
+			readExcelValue(wb, uploadfile.getAbsolutePath());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -84,7 +91,7 @@ public class BatchImportServiceImpl {
 	 * @param wb
 	 * @return
 	 */
-	private void readExcelValue(Workbook workbook,String filePathName) {
+	private void readExcelValue(Workbook workbook, String filePathName) {
 
 		// 获取所有的工作表的的数量
 		int numOfSheet = workbook.getNumberOfSheets();
@@ -114,21 +121,23 @@ public class BatchImportServiceImpl {
 				}
 				putSupplierIp(map, row);
 				putCustomerIp(map, row);
-				
+				putCustomeruserAgent(map, row);
 				testRest.test(map);
-//				map.put("policyNo", "test");
-//				map.put("errMsg","eoo");
-				
+				// map.put("policyNo", "test");
+				// map.put("errMsg","eoo");
+
 				newNameCell = row.createCell(row.getLastCellNum(), Cell.CELL_TYPE_STRING);
 				newNameCell.setCellValue((String) map.get("policyNo"));
 
 				newNameCell = row.createCell(row.getLastCellNum(), Cell.CELL_TYPE_STRING);
 				newNameCell.setCellValue((String) map.get("errMsg"));
-				
-				putCustomeruserAgent(map, row);
+
+				newNameCell = row.createCell(row.getLastCellNum(), Cell.CELL_TYPE_STRING);
+				newNameCell.setCellValue((String) map.get("userAgent"));
+
 			}
 		}
-		
+
 		try {
 			FileOutputStream excelFileOutPutStream = new FileOutputStream(filePathName);
 			workbook.write(excelFileOutPutStream);
@@ -145,8 +154,7 @@ public class BatchImportServiceImpl {
 		Random ran = new Random();
 		int index = ran.nextInt(this.userAgent.length);
 		map.put("userAgent", this.userAgent[index]);
-		Cell newNameCell = row.createCell(row.getLastCellNum(), Cell.CELL_TYPE_STRING);
-		newNameCell.setCellValue((String) map.get("userAgent"));
+
 	}
 
 	private void getValueFromExcelEachRow(Row row, int index, String key, Map map) {
@@ -157,15 +165,68 @@ public class BatchImportServiceImpl {
 
 	private void putSupplierIp(Map map, Row row) {
 		map.put("supplierIp", "114.67.239.5");
-		
+
 		Cell newNameCell = row.createCell(row.getLastCellNum(), Cell.CELL_TYPE_STRING);
 		newNameCell.setCellValue((String) map.get("supplierIp"));
 	}
 
 	private void putCustomerIp(Map map, Row row) {
-		map.put("customerIp", "114.67.239.5");
-		
+		String ip = ramdomIp();
+		map.put("customerIp", ip);
+
 		Cell newNameCell = row.createCell(row.getLastCellNum(), Cell.CELL_TYPE_STRING);
 		newNameCell.setCellValue((String) map.get("customerIp"));
+	}
+
+	private String ramdomIp() {
+		try {
+			Random random = new Random();
+			if (map.size() == 0) {
+				File file = ResourceUtils.getFile("classpath:templates/ip.txt");
+				BufferedReader reder = null;
+				try {
+					reder = new BufferedReader(new FileReader(file));
+					String s = null;
+					int len = 0;
+					while ((s = reder.readLine()) != null) {
+						i = len++;
+						String[] ipminmax = s.trim().split("-");
+						String ipnode[] = ipminmax[1].split("\\.");
+						String ip3 = ipnode[2];
+						String ip4 = ipnode[3];
+						map.put(i+"_3_max", ip3);
+						map.put(i+"_4_max", ip4);
+						map.put(i+"_min", ipminmax[0]);
+						ipnode = ipminmax[0].split("\\.");
+						ip3 = ipnode[2];
+						ip4 = ipnode[3];
+						map.put(i+"_3_min", ip3);
+						map.put(i+"_4_min", ip4);
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						reder.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			} 
+			String iprank = String.valueOf(random.nextInt(i+1));
+			
+			String realip3 = String.valueOf(random.nextInt(Integer.valueOf((String)map.get(iprank+"_3_max"))));
+			String realip4 = String.valueOf(random.nextInt(Integer.valueOf((String)map.get(iprank+"_4_max"))));
+			String min = map.get(iprank+"_min");
+//			min = ;
+			return min.replace("."+map.get(iprank+"_3_min")+".", "."+realip3+".").replace("."+map.get(iprank+"_4_min"), "."+realip4);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 }

@@ -33,7 +33,7 @@ public class TestRest {
 	private String vUserPassword = "2f3F4WnJ";
 
 	// 获取tooken地址(生产地址见文档最后)
-	private String openUrl = "http://test-api.pingan.com.cn:20080/open";
+	private String openUrl = "http://api.pingan.com.cn/open";
 
 	// esg转发地址(生产地址见文档最后)
 	private String oauthUrl = "http://api.pingan.com.cn/oauth/oauth2/";
@@ -91,9 +91,10 @@ public class TestRest {
 		// JSONObject result = JSON.parseObject(invoke());
 		JSONObject result;
 		try {
-
-			// getAccessToken();
-			// result = JSONObject.parseObject(invoke(map));
+			if(tokenCache.size()==0){
+				getAccessToken();
+			}
+			result = JSONObject.parseObject(invoke(map));
 
 			// String code = result.getString("ret");
 			//
@@ -106,8 +107,9 @@ public class TestRest {
 			// "{
 			// \"ret\":\"0\",\"msg\":\"\",\"requestId\":\"1467018633163\",\"data\":{\"errMsg\":\"idTypeisnull\",\"errCode\":\"005\",\"resultCode\":\"02\"}}");
 
-			result = JSONObject.parseObject(
-					"{ \"ret\":\"0\",\"msg\":\"\",\"requestId\":\"1466998590645\",\"data\":{\"requestId\":\"363B3A04C23549CBE05400144F269649\",\"errMsg\":\"ok\",\"errCode\":null,\"resultCode\":\"0\",\"policyNo\":\"P420000001882201\"}}");
+			// result = JSONObject.parseObject(
+			// "{
+			// \"ret\":\"0\",\"msg\":\"\",\"requestId\":\"1466998590645\",\"data\":{\"requestId\":\"363B3A04C23549CBE05400144F269649\",\"errMsg\":\"ok\",\"errCode\":null,\"resultCode\":\"0\",\"policyNo\":\"P420000001882201\"}}");
 			Map res = (Map) result.get("data");
 			String code = (String) res.get("resultCode");
 			String policyNo = null;
