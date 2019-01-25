@@ -31,10 +31,12 @@ public class BatchImportServiceImpl {
 	String[] keys = { "name", "sex", "birth", "mobile", "cityName", "mediaSource", "productCode", "policyBeginTime",
 			"supplierName", "supplierType", "disTestOrfree" };
 
-	HashMap<String,String> map = new HashMap<String,String>();
+	HashMap<String, String> map = new HashMap<String, String>();
+
+	HashMap<String, String> rateMap = new HashMap<String, String>();
 
 	int i;
-	
+
 	String userAgent[] = { " Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0",
 			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36",
 			"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36 OPR/46.0.2597.57 Opera/9.27 (Windows NT 5.2; U; zh-cn)",
@@ -115,6 +117,16 @@ public class BatchImportServiceImpl {
 			newNameCell = row.createCell(row.getLastCellNum(), Cell.CELL_TYPE_STRING);
 			newNameCell.setCellValue("客户端浏览器");
 			for (int j = 1; j <= lastRowNum; j++) {
+
+				if (j % 10 == 0) {
+					this.rateMap.put(filePathName.substring(filePathName.lastIndexOf("\\"), filePathName.length()).replace("\\", ""),
+							String.valueOf((((float)j / (float)lastRowNum) * 100)));
+				}
+				
+				if(j==lastRowNum){
+					this.rateMap.put(filePathName.substring(filePathName.lastIndexOf("\\"), filePathName.length()).replace("\\", ""),"100");
+				}
+
 				row = sheet.getRow(j);
 				for (int n = 0; n < keys.length; n++) {
 					getValueFromExcelEachRow(row, n, keys[n], map);
@@ -194,14 +206,14 @@ public class BatchImportServiceImpl {
 						String ipnode[] = ipminmax[1].split("\\.");
 						String ip3 = ipnode[2];
 						String ip4 = ipnode[3];
-						map.put(i+"_3_max", ip3);
-						map.put(i+"_4_max", ip4);
-						map.put(i+"_min", ipminmax[0]);
+						map.put(i + "_3_max", ip3);
+						map.put(i + "_4_max", ip4);
+						map.put(i + "_min", ipminmax[0]);
 						ipnode = ipminmax[0].split("\\.");
 						ip3 = ipnode[2];
 						ip4 = ipnode[3];
-						map.put(i+"_3_min", ip3);
-						map.put(i+"_4_min", ip4);
+						map.put(i + "_3_min", ip3);
+						map.put(i + "_4_min", ip4);
 					}
 
 				} catch (Exception e) {
@@ -213,20 +225,35 @@ public class BatchImportServiceImpl {
 						e.printStackTrace();
 					}
 				}
-			} 
-			String iprank = String.valueOf(random.nextInt(i+1));
-			
-			String realip3 = String.valueOf(random.nextInt(Integer.valueOf((String)map.get(iprank+"_3_max"))));
-			String realip4 = String.valueOf(random.nextInt(Integer.valueOf((String)map.get(iprank+"_4_max"))));
-			String min = map.get(iprank+"_min");
-//			min = ;
-			return min.replace("."+map.get(iprank+"_3_min")+".", "."+realip3+".").replace("."+map.get(iprank+"_4_min"), "."+realip4);
-			
+			}
+			String iprank = String.valueOf(random.nextInt(i + 1));
+
+			String realip3 = String.valueOf(random.nextInt(Integer.valueOf((String) map.get(iprank + "_3_max"))));
+			String realip4 = String.valueOf(random.nextInt(Integer.valueOf((String) map.get(iprank + "_4_max"))));
+			String min = map.get(iprank + "_min");
+			// min = ;
+			return min.replace("." + map.get(iprank + "_3_min") + ".", "." + realip3 + ".")
+					.replace("." + map.get(iprank + "_4_min"), "." + realip4);
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		return "";
+	}
+
+	public String getFileRate(String fileName) {
+		if(rateMap.get(fileName)==null){
+			return "rate:";
+		}
 		
-		return null;
+		if (rateMap.get(fileName).equals("100")) {
+			this.rateMap.remove(fileName);
+			return "rate:over";
+		} else {
+			return "rate:" + rateMap.get(fileName);
+		}
+
 	}
 }

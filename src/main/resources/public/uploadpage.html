@@ -2,12 +2,57 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
+<script src="js/jquery-1.12.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#button1").click(function(){
+		var pg= document.getElementById('pg');
+		var file= $('#file').val();
+		if(!file){
+			alert('请选择文件');
+			return;
+		}
+	
+		var suffix = file.substr(file.lastIndexOf("\\"));
+		
+	$('#form1').submit();
+	
+		setInterval(function(e){
+			$.get("/getRate?file="+suffix,function(data){
+				var s = data.split(':');
+			    if(s[1]=='over'){
+			    	
+			    	clearInterval(2000);
+			    } else {
+			    	
+			    	pg.value = s[1]
+			    	/* if(pg.value!=100) ++;
+			        else pg.value=0; */
+			    }
+			  });
+			
+		     
+		},2000);
+	})
+})
+
+
+
+</script>
+
 </head>
 <body>
-<form method="post" action="/upload" enctype="multipart/form-data">
-    <input type="file" name="file"><br>
-    <input type="submit" value="提交">
+
+<h1 align="center">导入完成后自动下载</h1>
+
+<div align="center">
+<form method="post" id="form1" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="file" id="file">
+    <input type="button" value="提交" id="button1">
 </form>
 
+<progress max="100" value="0" id="pg"></progress>
+
+</div>
 </body>
 </html>

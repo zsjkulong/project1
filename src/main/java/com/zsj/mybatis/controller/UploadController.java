@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.zsj.mybatis.service.BatchImportServiceImpl;
@@ -32,7 +33,7 @@ public class UploadController {
 	// @ResponseBody
 	public String upload(@RequestParam("file") MultipartFile file, Model model) {
 		if (file.isEmpty()) {
-			// return "文件为空";
+			 return "文件为空";
 		}
 		// RestTemplate restTemplate = new RestTemplate();
 		// 获取文件名
@@ -134,6 +135,13 @@ public class UploadController {
 				}
 			}
 		}
+	}
+	
+	
+	@RequestMapping(value = "/getRate")
+	@ResponseBody
+	public String getRate(String file){
+		return batch.getFileRate(file.replace("\\", ""));
 	}
 
 }
