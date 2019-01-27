@@ -2,6 +2,99 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title></title>
+
+<style>
+		/*样式1*/
+		.a-upload {
+			padding: 4px 10px;
+			height: 20px;
+			line-height: 20px;
+			position: relative;
+			cursor: pointer;
+			color: #888;
+			background: #fafafa;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+			overflow: hidden;
+			display: inline-block;
+			*display: inline;
+			*zoom: 1
+		}
+		
+		.a-upload  input {
+			position: absolute;
+			font-size: 100px;
+			right: 0;
+			top: 0;
+			opacity: 0;
+			filter: alpha(opacity=0);
+			cursor: pointer
+		}
+		
+		.a-upload:hover {
+			color: #444;
+			background: #eee;
+			border-color: #ccc;
+			text-decoration: none
+		}
+		/*样式2*/
+		.file {
+			position: relative;
+			display: inline-block;
+			background: #D0EEFF;
+			border: 1px solid #99D3F5;
+			border-radius: 4px;
+			padding: 4px 12px;
+			overflow: hidden;
+			color: #1E88C7;
+			text-decoration: none;
+			text-indent: 0;
+			line-height: 20px;
+		}
+		.file input {
+			position: absolute;
+			font-size: 100px;
+			right: 0;
+			top: 0;
+			opacity: 0;
+		}
+		.file:hover {
+			background: #AADFFD;
+			border-color: #78C3F3;
+			color: #004974;
+			text-decoration: none;
+		}
+		
+		
+		.login-button { /* 按钮美化 */
+	width: 100px; /* 宽度 */
+	height: 30px; /* 高度 */
+	border-width: 0px; /* 边框宽度 */
+	border-radius: 3px; /* 边框半径 */
+	background: #1E90FF; /* 背景颜色 */
+	cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+	outline: none; /* 不显示轮廓线 */
+	font-family: Microsoft YaHei; /* 设置字体 */
+	color: white; /* 字体颜色 */
+	font-size: 17px; /* 字体大小 */
+}
+
+progress
+{
+        width: 268px;
+    height: 5px;
+        
+}
+progress::-webkit-progress-bar
+{
+       background-color:#d7d7d7;
+}
+progress::-webkit-progress-value
+{
+     background-color:orange;
+}
+    </style>
+
 <script src="js/jquery-1.12.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -12,17 +105,17 @@ $(function(){
 			alert('请选择文件');
 			return;
 		}
-	
+	$("#dv").css('display','block');
 		var suffix = file.substr(file.lastIndexOf("\\"));
 		
 	$('#form1').submit();
 	
-		setInterval(function(e){
-			$.get("/getRate?file="+suffix,function(data){
+	var id = setInterval(function(e){
+			$.post("getRate",{file:suffix},function(data){
 				var s = data.split(':');
 			    if(s[1]=='over'){
-			    	
-			    	clearInterval(2000);
+			    	$("#dv").css('display','none');
+			    	clearInterval(id);
 			    } else {
 			    	
 			    	pg.value = s[1]
@@ -41,18 +134,33 @@ $(function(){
 </script>
 
 </head>
-<body>
+<body >
+
+
+
+<div align="center" style="position: absolute;
+top: 50%;
+left: 50%;
+height: 30%;
+width: 50%;
+margin: -15% 0 0 -25%;">
 
 <h1 align="center">导入完成后自动下载</h1>
-
-<div align="center">
-<form method="post" id="form1" action="/upload" enctype="multipart/form-data">
-    <input type="file" name="file" id="file">
-    <input type="button" value="提交" id="button1">
+<br>
+<form method="post" id="form1" action="upload" enctype="multipart/form-data">
+    <input type="file" name="file" id="file" class="file">
+    <br><br><input type="button" value="上传" id="button1" class="login-button">
 </form>
+</div>
+
+<div align="center" style="position: absolute;
+top: 50%;
+left: 50%;
+height: 30%;
+width: 50%;
+margin: 0 0 0 -25%;display:none;" id="dv">
 
 <progress max="100" value="0" id="pg"></progress>
-
 </div>
 </body>
 </html>

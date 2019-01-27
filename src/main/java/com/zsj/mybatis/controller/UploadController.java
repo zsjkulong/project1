@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zsj.mybatis.service.BatchImportServiceImpl;
 
@@ -31,9 +32,9 @@ public class UploadController {
 
 	@RequestMapping(value = "/upload")
 	// @ResponseBody
-	public String upload(@RequestParam("file") MultipartFile file, Model model) {
+	public String upload(@RequestParam("file") MultipartFile file, RedirectAttributes attributes) {
 		if (file.isEmpty()) {
-			 return "文件为空";
+			return "文件为空";
 		}
 		// RestTemplate restTemplate = new RestTemplate();
 		// 获取文件名
@@ -74,26 +75,42 @@ public class UploadController {
 			e.printStackTrace();
 		}
 		// model.addAttribute("file", dest.getAbsolutePath());
-
-		return "redirect:download?file=" + URLEncoder.encode(dest.getAbsolutePath());
+		String filen = null;
+//		try {
+//			filen = new String(dest.getAbsolutePath().getBytes("gb2312"),"UTF-8");
+			filen = URLEncoder.encode(dest.getAbsolutePath());
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+			attributes.addAttribute("file", filen);
+//		System.out.println("filen:"+filen);
+		return "redirect:download";
 		// return "download";
 	}
 
 	// 文件下载
-	@RequestMapping(value = "/download", produces = "text/plain;charset=UTF-8")
+	@RequestMapping(value = "/download")
 	public void downloadFile(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("file") String fileName) {
+			@ModelAttribute("file") String fileName) {
 		if (fileName != null) {
 			// 当前是从该工程的WEB-INF//File//下获取文件(该目录可以在下面一行代码配置)然后下载到C:\\users\\downloads即本机的默认下载的目录
 			// String realPath =
 			// request.getServletContext().getRealPath("//WEB-INF//");
 			// String realPath = "D://test//";
+//			try {
+				fileName = java.net.URLDecoder.decode(fileName);
+//			} catch (UnsupportedEncodingException e2) {
+//				// TODO Auto-generated catch block
+//				e2.printStackTrace();
+//			}
+//			System.out.println("file:" + fileName);
 			File file = new File(fileName);
 			if (file.exists()) {
 				response.setHeader("content-type", "application/octet-stream");
 				response.setContentType("application/octet-stream");
 				try {
-					String fileres = file.getName().substring(0,file.getName().lastIndexOf(".")) + "_结果"
+					String fileres = file.getName().substring(0, file.getName().lastIndexOf(".")) + "_结果"
 							+ file.getName().substring(file.getName().lastIndexOf("."), file.getName().length());
 					response.setHeader("Content-Disposition",
 							"attachment;filename=" + URLEncoder.encode(fileres, "UTF-8"));
@@ -136,11 +153,10 @@ public class UploadController {
 			}
 		}
 	}
-	
-	
+
 	@RequestMapping(value = "/getRate")
 	@ResponseBody
-	public String getRate(String file){
+	public String getRate(String file) {
 		return batch.getFileRate(file.replace("\\", ""));
 	}
 

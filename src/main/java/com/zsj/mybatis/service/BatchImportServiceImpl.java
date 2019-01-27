@@ -19,6 +19,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
@@ -27,7 +28,10 @@ public class BatchImportServiceImpl {
 
 	@Autowired
 	TestRest testRest;
-
+	
+	@Value("${key}")
+	String key;
+	
 	String[] keys = { "name", "sex", "birth", "mobile", "cityName", "mediaSource", "productCode", "policyBeginTime",
 			"supplierName", "supplierType", "disTestOrfree" };
 
@@ -94,7 +98,9 @@ public class BatchImportServiceImpl {
 	 * @return
 	 */
 	private void readExcelValue(Workbook workbook, String filePathName) {
-
+		
+		this.keys = this.key.split(",");
+		
 		// 获取所有的工作表的的数量
 		int numOfSheet = workbook.getNumberOfSheets();
 
@@ -245,7 +251,7 @@ public class BatchImportServiceImpl {
 
 	public String getFileRate(String fileName) {
 		if(rateMap.get(fileName)==null){
-			return "rate:";
+			return "rate:over";
 		}
 		
 		if (rateMap.get(fileName).equals("100")) {
