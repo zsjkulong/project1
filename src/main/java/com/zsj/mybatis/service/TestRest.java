@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.poi.ss.usermodel.Row;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -32,10 +33,14 @@ public class TestRest {
 	// 密码（申请应用时生成的）
 	private String vUserPassword = "2f3F4WnJ";
 
+	
+	
 	// 获取tooken地址(生产地址见文档最后)
+	@Value("${pinganurl}")
 	private String openUrl = "http://api.pingan.com.cn/open";
 
 	// esg转发地址(生产地址见文档最后)
+	@Value("${pinganoauthurl}")
 	private String oauthUrl = "http://api.pingan.com.cn/oauth/oauth2/";
 
 	private static Map<String, String> codeMap = new HashMap<String, String>();
