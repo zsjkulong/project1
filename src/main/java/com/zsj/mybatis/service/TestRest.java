@@ -28,13 +28,16 @@ public class TestRest {
 	private static final Logger logger = LoggerFactory.getLogger(TestRest.class);
 
 	// 应用编码
-	private String vUserId = "P_PA19_SHOP_LIFE";
+	@Value("${clientid}")
+	private String vUserId = "P_MZKJ_DALIBAO20190325";
+//	life_free_network_new
 
 	// 密码（申请应用时生成的）
-	private String vUserPassword = "2f3F4WnJ";
+//	private String vUserPassword = "2f3F4WnJ";
+	
+	@Value("${userpassword}")
+	private String vUserPassword ="123456";
 
-	
-	
 	// 获取tooken地址(生产地址见文档最后)
 	@Value("${pinganurl}")
 	private String openUrl = "http://api.pingan.com.cn/open";
@@ -78,7 +81,7 @@ public class TestRest {
 		codeMap.put("02" + "032", "值不为”1”或”2”");
 		codeMap.put("02" + "030", "赠险领取客户的访问IP不能为空");
 		codeMap.put("02" + "031", "赠险领取客户的访问IP格式不正确");
-		codeMap.put("11" + "14", "赠险量超过每月/每日最多限制数");
+		codeMap.put("11" + "14", "赠险量超过每月/每日最多限制数（前端返回的）具体见邵云需求：邵云_PA18_赠险获客增加可用名单量控制");
 		codeMap.put("11" + "011", "媒体来源不在白名单内，请联系业务申请白名单");
 		codeMap.put("11" + "013", "媒体来源在后台管理系统没有配置，或者每天赠险名单量达到上限");
 		codeMap.put("11" + "012", "黑名单校验未通过");
@@ -96,10 +99,11 @@ public class TestRest {
 		// JSONObject result = JSON.parseObject(invoke());
 		JSONObject result;
 		try {
-			if(tokenCache.size()==0){
+			if (tokenCache.size() == 0) {
 				getAccessToken();
 			}
 			result = JSONObject.parseObject(invoke(map));
+			logger.info("result:" + result);
 
 			// String code = result.getString("ret");
 			//
@@ -119,22 +123,23 @@ public class TestRest {
 			String code = (String) res.get("resultCode");
 			String policyNo = null;
 			String errCode = null;
-			String errMsg = null;
+			String errMsg = (String) res.get("errMsg");
 			if ("0".equals(code)) {
 				policyNo = (String) res.get("policyNo");
 			} else if (!"0".equals(code) && code != null) {
 				errCode = (String) res.get("errCode");
-				// errMsg = (String)result.get("errMsg");
+
+				errMsg = (String) res.get("errMsg");
 			}
 			if (map.get("disTestOrfree").equals("1")) {
 				if (StringUtils.isEmpty(policyNo)) {
-					map.put("errMsg", codeMap.get(code + errCode));
+					map.put("errMsg", codeMap.get(code + errCode) == null ? errMsg : codeMap.get(code + errCode));
 				} else {
 					map.put("errMsg", "0");
 				}
 			} else {
 				if (StringUtils.isEmpty(policyNo)) {
-					map.put("errMsg", codeMap.get(code + errCode));
+					map.put("errMsg", codeMap.get(code + errCode) == null ? errMsg : codeMap.get(code + errCode));
 				} else {
 					map.put("errMsg", "ok");
 					map.put("policyNo", policyNo);
@@ -155,7 +160,7 @@ public class TestRest {
 	private String invoke(Map map) throws IOException {
 		RestTemplate restTemplate = new RestTemplate();
 		StringBuffer url = new StringBuffer();
-		url.append(this.openUrl + "/appsvr/life/donate");
+		url.append(this.openUrl + "/appsvr/life/donateNew");
 		url.append("?access_token=" + tokenCache.get("token"));
 		url.append("&request_id=" + System.currentTimeMillis());
 		HttpHeaders headers = new HttpHeaders();

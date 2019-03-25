@@ -50,7 +50,9 @@ public class BatchImportServiceImpl {
 			"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0",
 			"Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0)",
 			"Mozilla/5.0 (iPhone; CPU iPhone OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B206 Safari/7534.48.3" };
-
+	
+	String asdf[] = {"200101","200102","200103","200104","200105","200106","200107","200108"};
+	
 	public String batchImport(File uploadfile) {
 		// File uploadfile = new File(fileName);
 		// 创建一个目录 （它的路径名由当前 File 对象指定，包括任一必须的父路径。）
@@ -140,6 +142,7 @@ public class BatchImportServiceImpl {
 				putSupplierIp(map, row);
 				putCustomerIp(map, row);
 				putCustomeruserAgent(map, row);
+				putcaGuestTime(map, row);
 				testRest.test(map);
 				// map.put("policyNo", "test");
 				// map.put("errMsg","eoo");
@@ -175,6 +178,16 @@ public class BatchImportServiceImpl {
 
 	}
 
+	private void putcaGuestTime(Map map, Row row){
+		map.put("caGuestTime", System.currentTimeMillis());
+		map.put("caIncome","200106");
+		map.put("caServingMedia","300202");
+		map.put("caProductName","400202");
+		map.put("caAsset","500103");
+		map.put("caOccupation","600104");
+		
+	}
+	
 	private void getValueFromExcelEachRow(Row row, int index, String key, Map map) {
 		row.getCell(index).setCellType(Cell.CELL_TYPE_STRING);
 		String value = row.getCell(index).getStringCellValue();

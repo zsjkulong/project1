@@ -10,6 +10,8 @@ body{ background-color: #81bc1f; font-family: "Source Han Sans",Helvetica,Tahoma
 
 .modal-body p{font-size:10px;color:white;}
 
+.anquan p{font-size:10px;}
+
 #page1 #page1notice{display:none;}
 
 #box .box h2{ font-size:1.78rem; color:#fff; font-weight:normal; padding
@@ -141,6 +143,19 @@ position: absolute;
     margin: 0 auto;
 }
 
+#anquan{
+	width:40%; background:#fff; margin-bottom:6rem; z-index:9997; position:absolute; top:40%; left:30%; border-radius: .5rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius:  .5rem;
+    margin: 0 auto;
+    background-color: #fff;
+    text-align: left;
+    
+    
+}
+
 #page1 img{
 
 	width:100%;height:20rem;
@@ -234,7 +249,7 @@ position: absolute;
   #modal-body-d  {display:block;}
  .m-contenbox{ width: 100%; height: auto; margin: 0 auto;margin-top: 250px; padding: 100px 0px 0 0px;background-color: #81bc1f; border-style: none;}
  #box{background:#81bc1f;width: 80%; margin:0 auto; }
- #box .box h2{ font-size:2.0rem; color:#fff; font-weight:normal; padding-top: 5px;text-align:center; width:100%;}
+ #box .box h2{ font-size:1.8rem; color:#fff; font-weight:normal; padding-top: 5px;text-align:center; width:100%;}
  .ryui-box-flex-1 p{
 	padding-left :1rem;
 	padding-top :.4rem;
@@ -244,7 +259,7 @@ position: absolute;
  
  #box .link a {
     float: left;
-    background: url(../images/H5-1.png) no-repeat center;
+    background: url(../images/H5-2.png) no-repeat center;
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
@@ -300,6 +315,22 @@ padding-right:3rem;
 }
 
 
+#anquan{
+	width: 100%; height: 100%;background:#fff; margin-bottom:6rem; z-index:9997; position:absolute; top:0; left:0; border-radius: .5rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius:  .5rem;
+    margin: 0 auto;
+    background-color: #fff;
+    padding-top:10px; 
+  padding-left:10px; 
+  padding-right:10px; 
+  text-align: left;
+}
+
+.anquan p{font-size:10px}
+
 }
 
 
@@ -315,6 +346,21 @@ padding-right:3rem;
 	-moz-background-size:60% 40%;
 	 width:29rem;height:21rem; */
 	}
+	
+	#anquan{
+	width: 100%; height: 100%;background:#fff; margin-bottom:6rem; z-index:9997; position:absolute; top:0; left:0; border-radius: .5rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius:  .5rem;
+    margin: 0 auto;
+    background-color: #fff;
+    
+    padding-top:10px; 
+  padding-left:10px; 
+  padding-right:10px; 
+    text-align: left;
+}
 }
 
 

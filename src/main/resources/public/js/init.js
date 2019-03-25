@@ -99,6 +99,21 @@ $( "#dialog" ).click(function() {
       	  $( "#page1-mask" ).hide();
       	  
       	});
+        
+$( "#open" ).click(function() {
+			var p = $(this).offset(); 
+      	  $( "#anquan" ).show( "fold", 200 ).css({ 
+	        left:p.left-15,
+	        top:p.top+30
+	    });
+      	  //$( "#page1-mask" ).show( "fold", 200 );
+      });
+      
+$( "#anquanclose" ).click(function() {
+    	  $( "#anquan" ).hide();
+    	  //$( "#page1-mask" ).hide();
+    	  
+    	});
       	
  $( "#sex1" ).click(function() {
         	$( "#sexman" ).removeClass("man");
